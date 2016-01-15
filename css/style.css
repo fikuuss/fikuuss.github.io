@@ -1,0 +1,75 @@
+@font-face {
+    font-family: "Exo 2";
+    src: url(fonts/Exo2.ttf);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #663300;
+}
+
+a:hover {
+    color: #184d00;
+}
+
+a:active {
+    color: #666666;
+}
+
+html, body, section {
+    width: 100%;
+}
+
+div, header, section, footer {
+    border: 1px dotted #999;
+    box-sizing: border-box;
+}
+
+.content-block-header {
+    margin: 0 auto;
+    width: 90%;
+    overflow: auto;
+}
+
+.content-block-header-left {
+    float: left;
+}
+
+.article-tags {
+    color: #ff3357;
+}
+
+.content-block-header-right {
+    float: right;
+}
+
+.article-date {
+    float: right;
+}
+
+.article-author {
+    float: right;
+    clear: right;
+}
+
+.content-block-article {
+    margin: 40px auto;
+    width: 90%;
+}
+
+.content-text {
+    font-family: 'Exo 2', serif;
+}
+
+.article-full {
+    position: relative;
+    left: 7%;
+}
