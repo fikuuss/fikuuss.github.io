@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/style.css">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/lib/underscore-min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-2.2.0.min.js"></script>
+    <title></title>
+
 </head>
-
 <body>
-<section>
-    <div class="content-block-header">
-        <div class="content-block-header-left">
-            <a href="#"><h3 class="article-title">Article title</h3></a>
-            <a href="#"><p class="article-tags">tags</p></a>
+    <header><h1 class="padding-elements">Site header</h1></header>
+    <section class="content-section">
+        <div class="content">
+            <div class="content-header"><h2 class="padding-elements">Content header</h2></div>
+            <div class="content-blocks-wrapper">
+                <div class="content-blocks">
+                    <!-- BEGIN: Template Constructor -->
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script type="text/template" class="template">
+                        <% _.each( articles, function(articles){ %>
+                        <section class="article-section">
+                            <div class="content-block-header">
+                                <div class="content-block-header-left">
+                                    <a href="#"><h3 class="article-title"><%- articles.title %></h3></a>
+                                    <a href="#"><p class="article-tags"><%- articles.tags %></p></a>
+                                </div>
+                                <div class="content-block-header-right">
+                                    <h3 class="article-date"><%- articles.date %></h3>
+                                    <p class="article-author"><%- articles.author %></p>
+                                </div>
+                            </div>
+                            <div class="content-block-article">
+                                <p class="content-text"><%- articles.fullArticle %></p>
+                            </div>
+                            <a href="#"><p class="article-full">Читать дальше...</p></a>
+                        </section>
+                        <% }); %>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                    <!-- Include and run scripts. -->
+                    <script type="text/javascript" src="js/script.js">
+                    </script>
+                    <!-- END: Template Constructor -->
+                </div>
+            </div>
         </div>
-        <div class="content-block-header-right">
-            <h3 class="article-date">14.02.2015</h3>
-            <p class="article-author">Николай Негулин</p>
+        <div class="search">
+            <div class="search-header"><h3 class="padding-elements">Search header</h3></div>
+            <div class="search-tags">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis era</div>
         </div>
-    </div>
-    <div class="content-block-article">
-        <p class="content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a dignissim leo. Fusce justo velit, dapibus sit amet blandit vel, commodo id metus. Donec ullamcorper malesuada quam. Ut condimentum massa non ligula tempus, feugiat porttitor libero maximus. Donec congue maximus augue eget vestibulum. Ut quis ultrices est. Duis ut turpis et sapien tempus bibendum in quis ligula. Nullam in justo blandit, ornare augue id, ullamcorper ante. Nam tempus, diam non convallis suscipit, eros diam dictum nisl, porttitor vulputate ex metus non dolor.</p>
-    </div>
-
-    <a href="#"><p class="article-full">Читать дальше...</p></a>
-</section>
+        <div class="clrfx"></div>
+    </section>
+    <footer>Site footer</footer>
 </body>
-
 </html>

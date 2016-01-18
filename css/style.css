@@ -1,9 +1,4 @@
-@font-face {
-    font-family: "Exo 2";
-    src: url(fonts/Exo2.ttf);
-}
-
-* {
+*  {
     margin: 0px;
     padding: 0px;
 }
@@ -24,13 +19,60 @@ a:active {
     color: #666666;
 }
 
-html, body, section {
-    width: 100%;
+html, body {
+    height: 100%;
+    min-height: 480px;
+    min-width: 640px;
+}
+
+.padding-elements {
+    padding: 20px;
 }
 
 div, header, section, footer {
     border: 1px dotted #999;
     box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 90px;
+}
+
+.content-section {
+    width: 100%;
+    position: absolute;
+    top: 90px;
+    bottom: 90px;
+}
+
+.content {
+    height: 100%;
+    width: 70%;
+    float: left;
+    position: relative;
+}
+
+.content-header {
+    position: absolute;
+    top: 0;
+    height: 90px;
+    width: 100%;
+}
+
+.content-blocks-wrapper {
+    height: 100%;
+    padding-top: 90px;
+}
+
+.content-blocks {
+    height: 100%;
+    overflow: auto;
+}
+
+.article-section {
+    width: 100%;
+    margin: 20px auto;
 }
 
 .content-block-header {
@@ -72,4 +114,26 @@ div, header, section, footer {
 .article-full {
     position: relative;
     left: 7%;
+}
+
+.search {
+    width: 30%;
+    float: right;
+}
+
+.search-header {
+    min-height: 90px;
+    max-height: 270px;
+}
+
+
+.clrfx {
+    clear:both;
+}
+
+footer {
+    width: 100%;
+    position:fixed;
+    bottom:0px;
+    height: 90px;
 }
