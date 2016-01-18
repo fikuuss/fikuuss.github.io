@@ -119,6 +119,7 @@ header {
 .article-full {
     position: relative;
     left: 7%;
+    margin-right: 7%;
 }
 
 .search {
