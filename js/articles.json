@@ -1,0 +1,54 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "Creating a fantasy world, Part 1",
+      "tags": [
+        "world", "fantasy", "novel", "writing", "advices", "intro"
+      ],
+      "date": "21.06.2014",
+      "author": "Cantor",
+      "text": "World building is an important component of fantasy writing because your fantasy world must be grounded in a history and abide by certain rules in order to persuade your readers to suspend their disbelief when you bring in magic, fantastical beasts and other implausible elements. Below are some of the important questions to ask yourself when creating a fantasy world."
+    } ,
+    {
+      "id": "2",
+      "title": "Creating a fantasy world, Part 2",
+      "tags": [
+        "world", "fantasy", "novel", "writing", "advices", "maintain"
+      ],
+      "date": "24.06.2014",
+      "author": "Cantor",
+      "text": "Maintaining consistency throughout your world building and writing is crucial. Just because this is fantasy and not science fiction does not mean that your world can lack rules or simply have arbitrary conditions imposed upon it. This adherence to rules will permeate every aspect of your fictional world, but to start with, be sure you are consistent in an overall sense. Whether you are basing your fantasy world on legend or real history such as medieval Europe, feudal Japan or Native American folklore or inventing it entirely out of your own head, every aspect must be consistent with the world you’ve created. If your fantasy world possesses a technology that seems out of step with its background, you need to have a good explanation for that whether it’s magic, intervention from a more technologically advanced society or something else."
+    } ,
+    {
+      "id": "3",
+      "title": "Creating a fantasy world, Part 3",
+      "tags": [
+        "world", "fantasy", "novel", "writing", "advices", "style"
+      ],
+      "date": "25.06.2014",
+      "author": "Cantor",
+      "text": "Another thing to keep in mind is the tone of your novel. For example, if you’re writing a novel of high fantasy steeped in Celtic legend, you might write in a way that recalls the language of fairy tales and legends. Your readers do not necessarily want to begin in the world of J.R.R. Tolkien with its roots in ancient sagas and suddenly find themselves slogging through the bleak and murderous darkness of George R.R. Martin’s Game of Thrones series. Maintaining a consistent tone is critical for believability throughout your fantasy novel."
+    } ,
+    {
+      "id": "4",
+      "title": "Creating a fantasy world, Part 4",
+      "tags": [
+        "world", "fantasy", "novel", "writing", "advices", "honor"
+      ],
+      "date": "27.06.2014",
+      "author": "Cantor",
+      "text": "This consistency of tone will be reflected in your characters as well. The values of the world will motivate your characters. In a world where honour and loyalty are considered of highest importance, characters will tend to behave differently from those in a world where power and accumulation of wealth are most valued. Of course, you can create characters whose values differ significantly from that of their world, but that difference is likely to be a source of conflict."
+    } ,
+    {
+      "id": "5",
+      "title": "Creating a fantasy world, Part 5",
+      "tags": [
+        "world", "fantasy", "novel", "writing", "advices", "magic"
+      ],
+      "date": "02.07.2014",
+      "author": "Cantor",
+      "text": "Most fantasy involves magic, and rules are important here as well. You can create any kind of magical system that you like, but the key here is that it does need to be some kind of system. Whether it is based on numbers, plants, words or something else, whether characters study for years to become proficient in it or are born with the ability, it needs to be consistent. Characters cannot suddenly develop new abilities or go outside that system."
+    }
+  ]
+}
