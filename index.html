@@ -5,49 +5,48 @@
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/lib/underscore-min.js"></script>
     <script type="text/javascript" src="js/lib/jquery-2.2.0.min.js"></script>
-    <script></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <script type="text/template" class="template">
+
+        <% _.each( articles, function(articles){ %>
+        <section class="article-section">
+            <div class="content-block-header">
+                <div class="content-block-header-left">
+                    <a href="#"><h3 class="article-title"><%- articles.title %></h3></a>
+                    <a href="#"><p class="article-tags"><%- articles.tags %></p></a>
+                </div>
+                <div class="content-block-header-right">
+                    <h3 class="article-date"><%- articles.date %></h3>
+                    <p class="article-author"><%- articles.author %></p>
+                </div>
+            </div>
+            <div class="content-block-article">
+                <p class="content-text"><%- articles.fullArticle %></p>
+            </div>
+            <a href="#"><p class="article-full">Читать дальше...</p></a>
+        </section>
+        <% }); %>
+
+    </script>
+
     <title></title>
 
 </head>
 <body>
-    <header><h1 class="padding-elements">Site header</h1></header>
+    <header>
+        <h1 class="elements-padding">Site header</h1>
+    </header>
     <section class="content-section">
         <div class="content">
-            <div class="content-header"><h2 class="padding-elements">Content header</h2></div>
+            <div class="content-header"><h2 class="elements-padding">Content header</h2></div>
             <div class="content-blocks-wrapper">
                 <div class="content-blocks">
-                    <!-- BEGIN: Template Constructor -->
-                    <!-- BEGIN: Underscore Template Definition. -->
-                    <script type="text/template" class="template">
-                        <% _.each( articles, function(articles){ %>
-                        <section class="article-section">
-                            <div class="content-block-header">
-                                <div class="content-block-header-left">
-                                    <a href="#"><h3 class="article-title"><%- articles.title %></h3></a>
-                                    <a href="#"><p class="article-tags"><%- articles.tags %></p></a>
-                                </div>
-                                <div class="content-block-header-right">
-                                    <h3 class="article-date"><%- articles.date %></h3>
-                                    <p class="article-author"><%- articles.author %></p>
-                                </div>
-                            </div>
-                            <div class="content-block-article">
-                                <p class="content-text"><%- articles.fullArticle %></p>
-                            </div>
-                            <a href="#"><p class="article-full">Читать дальше...</p></a>
-                        </section>
-                        <% }); %>
-                    </script>
-                    <!-- END: Underscore Template Definition. -->
-                    <!-- Include and run scripts. -->
-                    <script type="text/javascript" src="js/script.js">
-                    </script>
-                    <!-- END: Template Constructor -->
                 </div>
             </div>
         </div>
         <div class="search">
-            <div class="search-header"><h3 class="padding-elements">Search header</h3></div>
+            <div class="search-header"><h3 class="elements-padding">Search header</h3></div>
             <div class="search-tags">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis era</div>
         </div>
         <div class="clrfx"></div>
