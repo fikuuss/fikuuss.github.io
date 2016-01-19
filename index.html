@@ -13,16 +13,16 @@
         <section class="article-section">
             <div class="content-block-header">
                 <div class="content-block-header-left">
-                    <a href=""><h3 class="article-title"><%- articles.title %></h3></a>
-                    <a href=""><p class="article-tags"><%- articles.tags %></p></a>
+                    <a href=""><h3 class="article-title"><%= articles.title %></h3></a>
+                    <% _.each(articles.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
                 </div>
                 <div class="content-block-header-right">
-                    <h3 class="article-date"><%- articles.date %></h3>
-                    <p class="article-author"><%- articles.author %></p>
+                    <h3 class="article-date"><%= articles.date %></h3>
+                    <p class="article-author"><%= articles.author %></p>
                 </div>
             </div>
             <div class="content-block-article">
-                <p class="content-text"><%- articles.text %></p>
+                <p class="content-text"><%= articles.text %></p>
             </div>
             <a href=""><p class="article-full">Читать дальше...</p></a>
         </section>

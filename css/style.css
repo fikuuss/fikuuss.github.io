@@ -17,11 +17,11 @@ a:visited {
 }
 
 a:hover {
-    color: #184d00;
+    color: #184d00 !important;
 }
 
 a:active {
-    color: #666666;
+    color: #666666 !important;
 }
 
 html, body {
@@ -91,7 +91,7 @@ header {
 }
 
 .article-tags {
-    color: #ff3357;
+    color: #ff3357 !important;
 }
 
 .content-block-header-right {
