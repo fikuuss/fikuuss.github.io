@@ -7,27 +7,36 @@
     <script type="text/javascript" src="js/lib/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
-    <script type="text/template" class="template">
+    <script type="text/template" class="articles-template">
 
-        <% _.each( articles, function(articles){ %>
+        <% _.each( articles, function(article){ %>
         <section class="article-section">
             <div class="content-block-header">
                 <div class="content-block-header-left">
-                    <a href=""><h3 class="article-title"><%= articles.title %></h3></a>
-                    <% _.each(articles.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
+                    <a href=""><h3 class="article-title"><%= article.title %></h3></a>
+                    <% _.each(article.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
                 </div>
                 <div class="content-block-header-right">
-                    <h3 class="article-date"><%= articles.date %></h3>
-                    <p class="article-author"><%= articles.author %></p>
+                    <h3 class="article-date"><%= article.date %></h3>
+                    <p class="article-author"><%= article.author %></p>
                 </div>
             </div>
             <div class="content-block-article">
-                <p class="content-text"><%= articles.text %></p>
+                <p class="content-text"><%= article.text %></p>
             </div>
             <a href=""><p class="article-full">Читать дальше...</p></a>
         </section>
         <% }); %>
 
+    </script>
+
+    <script type="text/template" class="tags-template">
+
+        <form>
+            <% _.each( tags, function(tag, index){ %>
+                <input type="checkbox" id="chkbx<%= index %>" name="<%= tag %>"><%= tag %><Br>
+            <% }); %>
+        </form>
     </script>
 
     <title></title>
@@ -46,8 +55,10 @@
             </div>
         </div>
         <div class="search">
-            <div class="search-header"><h3 class="elements-padding">Search header</h3></div>
-            <div class="search-tags">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis era</div>
+            <div class="search-header">
+                <h3 class="elements-padding">Search header</h3>
+            </div>
+            <div class="search-tags"></div>
         </div>
         <div class="clrfx"></div>
     </section>
