@@ -1,16 +1,21 @@
 $(document).ready(function() {
+    //BEGIN: Model
+    var articlesTags = {
+        allTags: [],
+        selectedTags: []
+    };
+
     function createAllTags(data) {
-        var allTags = [];
         _.each(data.articles, function(article) {
             _.each(article.tags, function(tag) {
-                allTags.push(tag);
+                articlesTags.allTags.push(tag);
             });
         });
-        var uniqTags = _.uniq(allTags);
-
-        return uniqTags;
+        articlesTags.allTags = _.uniq(articlesTags.allTags);
     }
+    //END: Model
 
+    //BEGIN: View
     function displayArticles (data) {
         _.templateSettings.variable = "articles";
 
@@ -23,23 +28,46 @@ $(document).ready(function() {
         );
     }
 
-    function displayTags (data) {
-        var articlesTags = createAllTags(data);
-        console.log(articlesTags);
-
+    function tagsDisplay (data) {
         _.templateSettings.variable = "tags";
+
 
         var tagsTemplate = _.template(
             $("script.tags-template").html()
         );
 
-        $(".search-tags").append(
-            tagsTemplate(articlesTags)
+        $(".search").html("");
+
+        $(".search").append(
+            tagsTemplate(data)
         );
     }
+    //END: View
+
+    //BEGIN: Controller
+    function tagsController() {
+        $("input:checkbox").on("change", function() {
+
+            if ($("#" + this.id).prop("checked")) {
+                alert("Ena");
+                articlesTags.selectedTags.push(this.name);
+            }
+            else {
+                alert("Dis");
+                articlesTags.selectedTags = _.without(articlesTags.selectedTags, this.name);
+            }
+            tagsDisplay(articlesTags);
+        });
+    }
+    //END: Controller
 
     $.get("js/articles.json", {}, function(answer) {
         displayArticles(answer);
-        displayTags(answer);
+        createAllTags(answer);
+        tagsDisplay(articlesTags);
+    });
+
+    $(document).ajaxComplete(function() {
+        tagsController();
     });
 });
