@@ -25,7 +25,6 @@ $(document).ready(function() {
 
     function displayTags (data) {
         var articlesTags = createAllTags(data);
-        console.log(articlesTags);
 
         _.templateSettings.variable = "tags";
 
