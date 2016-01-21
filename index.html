@@ -31,12 +31,18 @@
     </script>
 
     <script type="text/template" class="tags-template">
-
-        <form>
-            <% _.each( tags, function(tag, index){ %>
+        <div class="search-header">
+            <p>
+                <% _.each( tags.selectedTags, function(tag) { %>
+                    <%= tag  %>
+                <% }); %>
+            </p>
+        </div>
+        <div class="search-tags">
+            <% _.each( tags.allTags, function(tag, index){ %>
                 <input type="checkbox" id="chkbx<%= index %>" name="<%= tag %>"><%= tag %><Br>
             <% }); %>
-        </form>
+        </div>
     </script>
 
     <title></title>
@@ -55,10 +61,7 @@
             </div>
         </div>
         <div class="search">
-            <div class="search-header">
-                <h3 class="elements-padding">Search header</h3>
-            </div>
-            <div class="search-tags"></div>
+
         </div>
         <div class="clrfx"></div>
     </section>
