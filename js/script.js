@@ -1,22 +1,30 @@
 $(document).ready(function() {
-    //BEGIN: Model
-    var articlesTags = {
-        allTags: [],
-        selectedTags: []
-    };
 
-    function createAllTags(data) {
-        _.each(data.articles, function(article) {
-            _.each(article.tags, function(tag) {
-                articlesTags.allTags.push(tag);
+    //BEGIN: Model
+    function articlesModel(articles) {
+        this.articles = articles.articles;
+    }
+
+    function tagsModel(articles) {
+        this.tags = {
+            allTags: receivingTags(articles),
+            selectedTags: []
+        };
+
+        function receivingTags (articles) {
+            var allTags = [];
+            _.each(articles, function(article) {
+                _.each(article.tags, function(tag) {
+                    allTags.push(tag);
+                });
             });
-        });
-        articlesTags.allTags = _.uniq(articlesTags.allTags);
+            return _.uniq(allTags);
+        }
     }
     //END: Model
 
     //BEGIN: View
-    function displayArticles (data) {
+    function displayArticles (articles) {
         _.templateSettings.variable = "articles";
 
         var articlesTemplate = _.template(
@@ -24,11 +32,11 @@ $(document).ready(function() {
         );
 
         $(".content-blocks").append(
-            articlesTemplate(data.articles)
+            articlesTemplate(articles)
         );
     }
 
-    function allTagsDisplay () {
+    function articlesTagsDisplay (tags) {
         _.templateSettings.variable = "tags";
 
 
@@ -39,11 +47,11 @@ $(document).ready(function() {
         $(".search-tags").html("");
 
         $(".search-tags").append(
-            tagsTemplate(articlesTags.allTags)
+            tagsTemplate(tags)
         );
     }
 
-    function selTagsDisplay () {
+    function selectedTagsDisplay (tags) {
         _.templateSettings.variable = "tags";
 
         var tagsTemplate = _.template(
@@ -53,30 +61,38 @@ $(document).ready(function() {
         $(".search-header").html("");
 
         $(".search-header").append(
-            tagsTemplate(articlesTags.selectedTags)
+            tagsTemplate(tags)
         );
     }
     //END: View
 
     //BEGIN: Controller
-    function tagsController() {
-        $("input:checkbox").on("change", function() {
-            if ($("#" + this.id).prop("checked")) {
-                articlesTags.selectedTags.push(this.id);
-            }
-            else {
-                articlesTags.selectedTags = _.without(articlesTags.selectedTags, this.id);
-            }
-            selTagsDisplay(articlesTags.selectedTags);
-        });
+    function controller (data) {
+        var readOnlyArticlesModel = new articlesModel(data);
+        var readOnlyTagsModel = new tagsModel(readOnlyArticlesModel.articles);
+
+        displayArticles(readOnlyArticlesModel.articles);
+        articlesTagsDisplay(readOnlyTagsModel.tags.allTags);
+        selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
+
+        tagsControl();
+
+        function tagsControl() {
+            $("input:checkbox").on("change", function() {
+                if ($("#" + this.id).prop("checked")) {
+                    readOnlyTagsModel.tags.selectedTags.push(this.id);
+                }
+                else {
+                    readOnlyTagsModel.tags.selectedTags = _.without(readOnlyTagsModel.tags.selectedTags, this.id);
+                }
+                selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
+                console.log(readOnlyTagsModel.tags.selectedTags);
+            });
+        }
     }
     //END: Controller
 
     $.get("js/articles.json", {}, function(answer) {
-        displayArticles(answer);
-        createAllTags(answer);
-        allTagsDisplay();
-        selTagsDisplay();
-        tagsController();
+        controller(answer);
     });
 });
