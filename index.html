@@ -32,14 +32,12 @@
 
     <script type="text/template" class="allTags-template">
         <% _.each(tags, function (tag) { %>
-            <% console.log(tag); %>
             <input type="checkbox" id="<%= tag %>"><%= tag %><Br>
         <% }); %>
     </script>
 
     <script type="text/template" class="selTags-template">
         <% _.each(tags, function (tag) { %>
-            <% console.log(tag) %>
             <%= tag %>
         <% }); %>
     </script>
