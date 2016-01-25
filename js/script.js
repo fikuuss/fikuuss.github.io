@@ -8,7 +8,7 @@ $(document).ready(function() {
     function tagsModel(articles) {
         this.tags = {
             allTags: receivingTags(articles),
-            selectedTags: []
+            selectedTags: receivingTags(articles)
         };
 
         function receivingTags (articles) {
@@ -31,12 +31,14 @@ $(document).ready(function() {
             $("script.articles-template").html()
         );
 
+        $(".content-blocks").html("");
+
         $(".content-blocks").append(
             articlesTemplate(articles)
         );
     }
 
-    function articlesTagsDisplay (tags) {
+    function displayArticlesTags (tags) {
         _.templateSettings.variable = "tags";
 
 
@@ -51,7 +53,7 @@ $(document).ready(function() {
         );
     }
 
-    function selectedTagsDisplay (tags) {
+    function displaySelectedTags (tags) {
         _.templateSettings.variable = "tags";
 
         var tagsTemplate = _.template(
@@ -70,10 +72,13 @@ $(document).ready(function() {
     function controller (data) {
         var readOnlyArticlesModel = new articlesModel(data);
         var readOnlyTagsModel = new tagsModel(readOnlyArticlesModel.articles);
+        var selectedArticles = readOnlyArticlesModel.articles;
 
-        displayArticles(readOnlyArticlesModel.articles);
-        articlesTagsDisplay(readOnlyTagsModel.tags.allTags);
-        selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
+        console.log(readOnlyArticlesModel.articles);
+
+        displayArticles(selectedArticles);
+        displayArticlesTags(readOnlyTagsModel.tags.allTags);
+        displaySelectedTags(readOnlyTagsModel.tags.selectedTags);
 
         tagsControl();
 
@@ -85,9 +90,32 @@ $(document).ready(function() {
                 else {
                     readOnlyTagsModel.tags.selectedTags = _.without(readOnlyTagsModel.tags.selectedTags, this.id);
                 }
-                selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
-                console.log(readOnlyTagsModel.tags.selectedTags);
+                displaySelectedTags(readOnlyTagsModel.tags.selectedTags);
+                articleControl();
             });
+        }
+
+        function articleControl() {
+            var flag = true;
+            _.each(readOnlyArticlesModel.articles, function(article) {
+                _.each(readOnlyTagsModel.tags.selectedTags, function(selTag) {
+                    console.log(_.contains(article.tags, selTag));
+                    if (!(_.contains(article.tags, selTag))) {
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    selectedArticles.push(article);
+                    selectedArticles = _.uniq(selectedArticles);
+                    console.log("pushed");
+                    console.log(selectedArticles);
+                }
+                else {
+                    selectedArticles = _.without(selectedArticles, article);
+                    console.log(selectedArticles);
+                }
+            });
+            //displayArticles(selectedArticles);
         }
     }
     //END: Controller
