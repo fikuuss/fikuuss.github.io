@@ -96,8 +96,8 @@ $(document).ready(function() {
         }
 
         function articleControl() {
-            var flag = true;
             _.each(readOnlyArticlesModel.articles, function(article) {
+                var flag = true;
                 _.each(readOnlyTagsModel.tags.selectedTags, function(selTag) {
                     console.log(_.contains(article.tags, selTag));
                     if (!(_.contains(article.tags, selTag))) {
@@ -115,7 +115,7 @@ $(document).ready(function() {
                     console.log(selectedArticles);
                 }
             });
-            //displayArticles(selectedArticles);
+            displayArticles(selectedArticles);
         }
     }
     //END: Controller
