@@ -32,11 +32,12 @@
 
     <script type="text/template" class="allTags-template">
         <% _.each(tags, function (tag) { %>
-            <input type="checkbox" id="<%= tag %>"><%= tag %><Br>
+            <input type="checkbox" class="tags-chkbx" id="<%= tag %>" checked><label for="<%= tag %>"><%= tag %></label><Br>
         <% }); %>
     </script>
 
     <script type="text/template" class="selTags-template">
+        <h3>Выбранные тэги:</h3>
         <% _.each(tags, function (tag) { %>
             <%= tag %>
         <% }); %>
@@ -47,11 +48,11 @@
 </head>
 <body>
     <header>
-        <h1 class="elements-padding">Site header</h1>
+        <h1 class="elements-padding">Портал начинающих писателей</h1>
     </header>
     <section class="content-section">
         <div class="content">
-            <div class="content-header"><h2 class="elements-padding">Content header</h2></div>
+            <div class="content-header"><h2 class="elements-padding">Статьи</h2></div>
             <div class="content-blocks-wrapper">
                 <div class="content-blocks">
                 </div>
@@ -65,6 +66,6 @@
         </div>
         <div class="clrfx"></div>
     </section>
-    <footer>Site footer</footer>
+    <footer>2016 designed by fikuuss</footer>
 </body>
 </html>
