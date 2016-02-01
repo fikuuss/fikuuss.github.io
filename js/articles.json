@@ -1,5 +1,4 @@
-{
-  "articles": [
+[
     {
       "id": "1",
       "title": "Creating a fantasy world, Part 1",
@@ -50,5 +49,4 @@
       "author": "Cantor",
       "text": "Most fantasy involves magic, and rules are important here as well. You can create any kind of magical system that you like, but the key here is that it does need to be some kind of system. Whether it is based on numbers, plants, words or something else, whether characters study for years to become proficient in it or are born with the ability, it needs to be consistent. Characters cannot suddenly develop new abilities or go outside that system."
     }
-  ]
-}
+]
