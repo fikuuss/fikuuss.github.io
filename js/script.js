@@ -132,13 +132,11 @@ $(document).ready(function() {
 
                 if (flag) {
                     selectedArticle = article;
-                    console.log(selectedArticle);
                     selectedArticle.set({"isShowed": true});
                     articles.add(selectedArticle.attributes, {merge: true});
                 }
                 else {
                     selectedArticle = article;
-                    console.log(selectedArticle);
                     selectedArticle.set({"isShowed": false});
                     articles.add(selectedArticle.attributes, {merge: true});
                 }
