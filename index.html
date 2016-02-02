@@ -5,40 +5,46 @@
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/lib/underscore-min.js"></script>
     <script type="text/javascript" src="js/lib/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/backbone-min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
     <script type="text/template" class="articles-template">
 
         <% _.each( articles, function(article){ %>
-        <section class="article-section">
-            <div class="content-block-header">
-                <div class="content-block-header-left">
-                    <a href=""><h3 class="article-title"><%= article.title %></h3></a>
-                    <% _.each(article.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
-                </div>
-                <div class="content-block-header-right">
-                    <h3 class="article-date"><%= article.date %></h3>
-                    <p class="article-author"><%= article.author %></p>
-                </div>
-            </div>
-            <div class="content-block-article">
-                <p class="content-text"><%= article.text %></p>
-            </div>
-            <a href=""><p class="article-full">Читать дальше...</p></a>
-        </section>
+            <% if (article.isShowed) { %>
+                <section class="article-section">
+                    <div class="content-block-header">
+                        <div class="content-block-header-left">
+                            <a href=""><h3 class="article-title"><%= article.title %></h3></a>
+                            <% _.each(article.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
+                        </div>
+                        <div class="content-block-header-right">
+                            <h3 class="article-date"><%= article.date %></h3>
+                            <p class="article-author"><%= article.author %></p>
+                        </div>
+                    </div>
+                    <div class="content-block-article">
+                        <p class="content-text"><%= article.text %></p>
+                    </div>
+                    <a href=""><p class="article-full">Читать дальше...</p></a>
+                </section>
+            <% } %>
         <% }); %>
 
     </script>
 
     <script type="text/template" class="allTags-template">
         <% _.each(tags, function (tag) { %>
-            <input type="checkbox" id="<%= tag %>"><%= tag %><Br>
+                <input type="checkbox" class="tags-chkbx" id="<%= tag.tagName %>"><label for="<%= tag.tagName %>"><%= tag.tagName %></label><Br>
         <% }); %>
     </script>
 
     <script type="text/template" class="selTags-template">
+        <h3>Выбранные тэги:</h3>
         <% _.each(tags, function (tag) { %>
-            <%= tag %>
+            <% if (tag.isSelected) { %>
+                <%= tag.tagName %>
+            <% } %>
         <% }); %>
     </script>
 
@@ -47,11 +53,11 @@
 </head>
 <body>
     <header>
-        <h1 class="elements-padding">Site header</h1>
+        <h1 class="elements-padding">Портал начинающих писателей</h1>
     </header>
     <section class="content-section">
         <div class="content">
-            <div class="content-header"><h2 class="elements-padding">Content header</h2></div>
+            <div class="content-header"><h2 class="elements-padding">Статьи</h2></div>
             <div class="content-blocks-wrapper">
                 <div class="content-blocks">
                 </div>
@@ -65,6 +71,6 @@
         </div>
         <div class="clrfx"></div>
     </section>
-    <footer>Site footer</footer>
+    <footer>2016 designed by fikuuss</footer>
 </body>
 </html>

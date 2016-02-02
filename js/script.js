@@ -1,98 +1,138 @@
 $(document).ready(function() {
 
     //BEGIN: Model
-    function articlesModel(articles) {
-        this.articles = articles.articles;
-    }
-
-    function tagsModel(articles) {
-        this.tags = {
-            allTags: receivingTags(articles),
-            selectedTags: []
-        };
-
-        function receivingTags (articles) {
-            var allTags = [];
-            _.each(articles, function(article) {
-                _.each(article.tags, function(tag) {
-                    allTags.push(tag);
-                });
-            });
-            return _.uniq(allTags);
+    var ArticleModel = Backbone.Model.extend({
+        defaults: {
+            "id": "",
+            "title": "",
+            "tags": "",
+            "date": "",
+            "author": "",
+            "text": "",
+            "isShowed": true
         }
+    });
+
+    var ArticlesCollection = Backbone.Collection.extend({
+        model: ArticleModel
+    });
+
+    var TagModel = Backbone.Model.extend({
+        defaults: {
+            "id": "",
+            "tagName": "",
+            "isSelected": false
+        }
+    });
+
+    var TagsCollection = Backbone.Collection.extend({
+        model: TagModel
+    });
+
+    function receivingTags (articles) {
+        var allTagsNames = [];
+        var allTags = [];
+        _.each(articles.toJSON(), function(article) {
+            _.each(article.tags, function(tag) {
+                allTagsNames.push(tag);
+                allTagsNames = _.uniq(allTagsNames);
+            });
+        });
+        _.each(allTagsNames, function(tagName, id) {
+            allTags.push({"id": id, "tagName": tagName});
+        });
+        return allTags;
     }
     //END: Model
 
     //BEGIN: View
-    function displayArticles (articles) {
-        _.templateSettings.variable = "articles";
+    var ArticlesView = Backbone.View.extend({
+        initialize: function() {
+            this.model.bind('change', this.render, this);
+            this.render()
+        },
 
-        var articlesTemplate = _.template(
-            $("script.articles-template").html()
-        );
+        el: $(".content-blocks"),
 
-        $(".content-blocks").append(
-            articlesTemplate(articles)
-        );
-    }
+        template:
+            _.template($("script.articles-template").html(), {variable: "articles"})
+        ,
 
-    function articlesTagsDisplay (tags) {
-        _.templateSettings.variable = "tags";
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+        }
+    });
 
+    var allTagsView = Backbone.View.extend({
+        initialize: function() {
+            this.render()
+        },
 
-        var tagsTemplate = _.template(
-            $("script.allTags-template").html()
-        );
+        el: $(".search-tags"),
 
-        $(".search-tags").html("");
+        template:
+            _.template($("script.allTags-template").html(), {variable: "tags"})
+        ,
 
-        $(".search-tags").append(
-            tagsTemplate(tags)
-        );
-    }
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+        }
+    });
 
-    function selectedTagsDisplay (tags) {
-        _.templateSettings.variable = "tags";
+    var selectedTagsView = Backbone.View.extend({
+        initialize: function() {
+            this.model.bind('change', this.render, this);
+            this.render()
+        },
 
-        var tagsTemplate = _.template(
-            $("script.selTags-template").html()
-        );
+        el: $(".search-header"),
 
-        $(".search-header").html("");
+        template:
+            _.template($("script.selTags-template").html(), {variable: "tags"})
+        ,
 
-        $(".search-header").append(
-            tagsTemplate(tags)
-        );
-    }
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+        }
+    });
     //END: View
 
     //BEGIN: Controller
-    function controller (data) {
-        var readOnlyArticlesModel = new articlesModel(data);
-        var readOnlyTagsModel = new tagsModel(readOnlyArticlesModel.articles);
+    function Controller (articles, tags) {
 
-        displayArticles(readOnlyArticlesModel.articles);
-        articlesTagsDisplay(readOnlyTagsModel.tags.allTags);
-        selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
+        $("input:checkbox").on("change", function() {
+            var selectedTag = tags.findWhere({"tagName": this.id});
+            selectedTag.set({"isSelected": $("#" + this.id).prop("checked")});
+            tags.add(selectedTag.attributes, {merge:true});
 
-        tagsControl();
+            articleControl(articles, tags)
+        });
 
-        function tagsControl() {
-            $("input:checkbox").on("change", function() {
-                if ($("#" + this.id).prop("checked")) {
-                    readOnlyTagsModel.tags.selectedTags.push(this.id);
-                }
-                else {
-                    readOnlyTagsModel.tags.selectedTags = _.without(readOnlyTagsModel.tags.selectedTags, this.id);
-                }
-                selectedTagsDisplay(readOnlyTagsModel.tags.selectedTags);
-                console.log(readOnlyTagsModel.tags.selectedTags);
+        function articleControl(articles, tags) {
+            var selectedTagsNames = [];
+            _.each(tags.where({"isSelected": true}), function(tag) {
+                selectedTagsNames.push(tag.attributes.tagName);
+            });
+
+            _.each(articles.models, function (article) {
+                var flag = true;
+                _.each(selectedTagsNames, function (selTag) {
+                    if (!(_.contains(article.attributes.tags, selTag))) {
+                        flag = false;
+                    }
+                });
+                article.set({"isShowed": flag});
             });
         }
     }
     //END: Controller
 
     $.get("js/articles.json", {}, function(answer) {
-        controller(answer);
+        var articles = new ArticlesCollection(answer);
+        var articlesView = new ArticlesView({model: articles});
+        var allTags = new TagsCollection(receivingTags(articles));
+        var tagsView = new allTagsView({model: allTags});
+        var selTagsView = new selectedTagsView({model: allTags});
+        Controller(articles, allTags);
     });
 });
