@@ -1,0 +1,6 @@
+    <h3>Выбранные тэги:</h3>
+    <% _.each(tags, function (tag) { %>
+        <% if (tag.isSelected) { %>
+            <%= tag.tagName %>
+        <% } %>
+    <% }); %>
