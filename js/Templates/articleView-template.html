@@ -1,0 +1,15 @@
+<section id="<%= article.id %>" class="article-section">
+    <div class="content-block-header">
+        <div class="content-block-header-left">
+            <a href=""><h3 class="article-title"><%= article.title %></h3></a>
+            <% _.each(article.tags, function(tag){ %><a class="article-tags" href="">|<%= tag %>|</a><% }) %>
+        </div>
+        <div class="content-block-header-right">
+            <h3 class="article-date"><%= article.date %></h3>
+            <p class="article-author"><%= article.author %></p>
+        </div>
+    </div>
+    <div class="content-block-article">
+        <p class="content-text"><%= article.deleteLabel(article.text) %></p>
+    </div>
+</section>

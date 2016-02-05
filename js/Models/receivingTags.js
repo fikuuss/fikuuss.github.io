@@ -14,7 +14,7 @@ define(
                 allTags.push({"id": id, "tagName": tagName});
             });
             return allTags;
-        }
+        };
 
         return receivingTags;
     }

@@ -7,6 +7,7 @@ requirejs.config({
         appFolder: "..",
         Controllers: "../Controllers",
         Models: "../Models",
+        States:"../States",
         Templates: "../Templates",
         Views: "../Views"
     },

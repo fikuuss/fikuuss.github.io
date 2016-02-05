@@ -21,6 +21,13 @@ define(
                     }
 
                     return words.join(" ") + "...";
+                },
+
+                "deleteLabel": function (text) {
+                    var words = text.split(' ');
+                    words.splice(_.indexOf(words, "!--continue--!"), 1);
+
+                    return words.join(" ");
                 }
             }
         });
