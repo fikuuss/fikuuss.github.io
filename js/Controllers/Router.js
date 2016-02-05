@@ -10,11 +10,9 @@ define(
 
             feedState: function(){
                 feedState();
-                alert("Work")
             },
 
             articleViewState: function(id) {
-                console.log(id);
                 articleViewState(id)
             }
         });
